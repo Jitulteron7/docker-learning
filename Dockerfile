@@ -15,8 +15,11 @@ RUN yarn install
 #note :docker caches all the steps for optimization and only if there is a change in one of the steps. then only it will work.
 #node : this  line copy everything from our current dir which is a bad thing. To ignore some unwanted file we use docker ignore file
 COPY . ./ 
+
+# setup environment variable default
+ENV PORT 3000
 # we are running in port 3000
-EXPOSE 3000
+EXPOSE $PORT
 
 # what command to run
 # node index.js
