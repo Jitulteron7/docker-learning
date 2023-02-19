@@ -20,4 +20,8 @@ EXPOSE 3000
 
 # what command to run
 # node index.js
-CMD ["node","index.js"]
+CMD ["npm","run","dev"]
+# after implementation of volume
+#note :after deleting node_module from the current dir and then run docker container. It will show that docker nodemon is not present 
+# This is because after volume implementaion it syncs with the current dir fils which results to override the /app node_module. So after deleting node_module it does not detect it so it throws error
+# for this prob we add another volument which specifies to not override /app files
