@@ -1,9 +1,21 @@
-version: '3'
+version: "3"
 services:
   node-app:
     build: .
     ports:
-     - "3000:3000"
+      - "3000:3000"
     environment:
       - PORT=3000
-    
+  mongo:
+    # we are using mongo image from docker hub directly so no need of build
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=jitul
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      # giving name to mongo-db volume
+      # but to use named vol like mongo-db we need to first define it
+      - mongo-db:/data/db
+volumes:
+  # this is the declaration of mongo-db vol
+  mongo-db: 

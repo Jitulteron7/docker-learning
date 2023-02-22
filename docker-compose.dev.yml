@@ -1,9 +1,20 @@
 version: "3"
 services:
   node-app:
+    build:
+      context: . # path
+      args:
+        NODE_ENV: development # put arg for docker
     volumes:
       - ./:/app
       - /app/node_modules
     environment:
       - NODE_ENV=development
+      - MONGO_USER=jitul
+      - MONGO_PASSWORD=password
+
     command: npm run dev
+  mongo:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=jitul
+      - MONGO_INITDB_ROOT_PASSWORD=password

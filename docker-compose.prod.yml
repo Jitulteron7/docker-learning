@@ -1,6 +1,10 @@
 version: "3"
 services:
   node-app:
+    build:
+      context: . # path
+      args:
+        NODE_ENV: production # put arg for docker
     environment:
       - NODE_ENV=production
     command: node index.js

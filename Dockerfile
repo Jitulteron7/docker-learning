@@ -6,9 +6,11 @@ WORKDIR /app
 # after package.json we need to specify the directory to which we want to copy (here . means current dir which in this case is /app 
 # also if it is /app also then it will work same as .)
 COPY package.json .
+
+ARG NODE_ENV
 RUN if [ "$NODE_ENV" = "development"]; \
-        then npm install; \
-        else npm install --only=production; \
+        then yarn install; \
+        else yarn install --only=production; \
         fi
 # can be . or ./ 
 # to copy everything (all the src code) from current dir to docker image 
