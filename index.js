@@ -8,16 +8,22 @@ const {
 } = require("./config/config");
 const app = express();
 
-mongoose
-  .connect(
-    `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`
-  )
-  .then(() => {
-    console.log("Successfully connected to db");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// note: do not depend on docker or docker orchestrator to handle connections
+// make sure that your application logic can handle that
+
+const connectRetry = () => {
+  mongoose
+    .connect(
+      `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`
+    )
+    .then(() => {
+      console.log("Successfully connected to db");
+    })
+    .catch((err) => {
+      console.log(err);
+      setTimeout(connectRetry, 5000);
+    });
+};
 
 const port = process.env.PORT || 3000;
 
