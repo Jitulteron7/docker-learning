@@ -9,6 +9,7 @@ services:
     # will start mongo container first
     depends_on:
       - mongo
+
   mongo:
     # we are using mongo image from docker hub directly so no need of build
     image: mongo
@@ -19,6 +20,12 @@ services:
       # giving name to mongo-db volume
       # but to use named vol like mongo-db we need to first define it
       - mongo-db:/data/db
+
+  redis:
+    image: redis
+
+
+    
 volumes:
   # this is the declaration of mongo-db vol
   mongo-db:
