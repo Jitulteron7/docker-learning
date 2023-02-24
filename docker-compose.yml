@@ -1,9 +1,14 @@
 version: "3"
 services:
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "3000:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
   node-app:
     build: .
-    ports:
-      - "3000:3000"
+
     environment:
       - PORT=3000
     # will start mongo container first
@@ -24,8 +29,6 @@ services:
   redis:
     image: redis
 
-
-    
 volumes:
   # this is the declaration of mongo-db vol
   mongo-db:

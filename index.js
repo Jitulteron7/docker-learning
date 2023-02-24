@@ -19,8 +19,10 @@ const redisClient = redis.createClient({
 const mongoose = require("mongoose");
 const port = process.env.PORT || 3000;
 const app = express();
+const cors = require("cors");
 const postRouter = require("./routes/post.route");
 const authRouter = require("./routes/auth.route");
+app.use(cors({}));
 app.use(express.json());
 
 // note: do not depend on docker or docker orchestrator to handle connections
@@ -39,7 +41,7 @@ const connectRetry = () => {
     });
 };
 connectRetry();
-
+app.enable("trust proxy");
 app.use(
   session({
     store: new redisStore({ client: redisClient }),
@@ -54,7 +56,8 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
+  console.log("running!!");
   res.send("<h2>Hi testing !!</h2>");
 });
 app.use("/api/v1/posts", postRouter);
