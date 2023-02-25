@@ -56,7 +56,7 @@ app.use(
   })
 );
 
-app.get("/api", (req, res) => {
+app.get("/api/v1", (req, res) => {
   console.log("running!!");
   res.send("<h2>Hi testing !!</h2>");
 });
