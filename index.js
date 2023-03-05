@@ -64,6 +64,6 @@ app.listen(port, () => {
   if (process.env.NODE_ENV === "development") {
     console.log("listening on port " + port + " development");
   } else {
-    console.log("listening on port " + port + " production");
+    console.log("listening on port is " + port + " production");
   }
 });
